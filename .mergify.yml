@@ -1,0 +1,23 @@
+scopes:
+  source:
+    files:
+      app:
+        include:
+          - app/**
+      docs:
+        include:
+          - docs/**
+  barrier_files:
+    include:
+      - barrier/**
+
+merge_queue:
+  mode: parallel
+  max_parallel_checks: 2
+
+queue_rules:
+  - name: default
+    batch_size: 1
+    queue_conditions: []
+    merge_conditions:
+      - check-success = VM2_BARRIER_NEVER_GREEN_C8R5
