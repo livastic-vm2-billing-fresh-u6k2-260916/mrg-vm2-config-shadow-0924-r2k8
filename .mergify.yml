@@ -5,15 +5,17 @@ scopes:
         include:
           - "**"
 
-merge_protections_settings:
-  reporting_method: check-runs
-  post_comment: true
-  auto_merge_conditions: true
+merge_queue:
+  mode: serial
 
-merge_protections:
-  - name: VM2 whitespace filename scope protected merge
-    if:
-      - base = main
-      - scope = critical
-    success_conditions:
+queue_rules:
+  - name: default
+    queue_conditions: []
+    merge_conditions:
       - check-success = vm2-whitespace-ci
+    merge_method: merge
+
+commands_restrictions:
+  queue:
+    conditions:
+      - sender-permission >= read
