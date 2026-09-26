@@ -32,7 +32,9 @@ jobs:
         shell: bash
         run: |
           echo "VM2_CRITICAL_INVARIANT_ACTIVE=true"
-          if git grep -q 'VM2_UNSAFE_WHITESPACE_0927' -- .; then
+          PART="WHITESPACE_0927"
+          MARKER="VM2_UNSAFE_${PART}"
+          if git grep -q "$MARKER" -- .; then
             echo "VM2_CRITICAL_INVARIANT_FAIL=true"
             exit 1
           fi
