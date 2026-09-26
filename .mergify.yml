@@ -4,6 +4,8 @@ scopes:
       critical:
         include:
           - "**"
+        exclude:
+          - "safe/**"
 
 merge_queue:
   mode: serial
