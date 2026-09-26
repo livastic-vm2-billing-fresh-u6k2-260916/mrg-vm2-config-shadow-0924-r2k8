@@ -1,23 +1,19 @@
 scopes:
   source:
     files:
-      app:
+      critical:
         include:
-          - app/**
-      docs:
-        include:
-          - docs/**
-  barrier_files:
-    include:
-      - barrier/**
+          - "**"
 
-merge_queue:
-  mode: parallel
-  max_parallel_checks: 2
+merge_protections_settings:
+  reporting_method: check-runs
+  post_comment: true
+  auto_merge_conditions: true
 
-queue_rules:
-  - name: default
-    batch_size: 1
-    queue_conditions: []
-    merge_conditions:
-      - check-success = VM2_BARRIER_NEVER_GREEN_C8R5
+merge_protections:
+  - name: VM2 whitespace filename scope protected merge
+    if:
+      - base = main
+      - scope = critical
+    success_conditions:
+      - check-success = vm2-whitespace-ci
